@@ -1,0 +1,771 @@
+1. Plan d’action Scalping Gold
+Objectif
+
+Prendre des mouvements courts, rapides, sur des zones précises, avec un risque très contrôlé.
+
+Le scalping sur le Gold est violent. Il ne faut pas chercher à “deviner” le marché. Il faut attendre une réaction claire sur une zone.
+
+Timeframes utilisés
+H1 / M15 : contexte rapide.
+M5 : zone de travail.
+M1 / M3 : entrée précise.
+Sessions idéales
+
+Le scalping Gold est surtout intéressant pendant les périodes liquides :
+
+Ouverture Londres : environ 9h00 – 11h00 heure France.
+Pré-ouverture US / ouverture US : environ 14h30 – 17h00 heure France.
+Éviter les périodes molles entre deux sessions.
+Éviter les minutes autour des grosses news si tu n’es pas ultra expérimenté.
+Logique générale
+
+Le scalping doit se faire uniquement sur :
+
+un support/résistance intraday clair ;
+un plus haut / plus bas de session ;
+une zone de liquidité prise puis rejetée ;
+une cassure/retest propre ;
+une FVG ou imbalance M1/M5 après impulsion.
+
+Le but n’est pas de prendre 15 trades. Le but est de prendre 1 à 3 trades propres maximum.
+
+Setup A — Scalping Rebond sur support
+Conditions
+
+Tu identifies une zone support M15/M5.
+
+Exemple théorique :
+
+Le prix arrive sur une zone déjà réactive.
+Il prend les stops sous un ancien plus bas.
+Il rejette rapidement la zone.
+Il forme une structure haussière en M1/M3.
+Validation obligatoire
+
+Il faut au minimum :
+
+une mèche basse nette ;
+une clôture de rejet ;
+puis un MSS haussier en M1/M3 ;
+idéalement un retour sur petite FVG ou pullback.
+Entrée
+
+Entrée possible :
+
+sur retest de la zone cassée ;
+ou sur retour dans une FVG M1/M3 ;
+jamais sur la première mèche de rejet à l’aveugle.
+Stop-loss
+
+Stop sous :
+
+la mèche de liquidité ;
+ou sous le dernier creux M1/M3.
+
+Le stop doit rester court. Si le stop devient trop large, le trade n’est plus un scalp.
+
+Take profit
+
+Objectifs réalistes :
+
+TP1 : dernier petit sommet M1/M5 ;
+TP2 : résistance M5 suivante ;
+sortie totale si le prix ralentit brutalement.
+Gestion
+À TP1, sécuriser partiellement.
+Mettre le stop à BE uniquement si le prix a vraiment avancé.
+Ne pas couper trop tôt si le setup est propre, mais ne pas espérer un swing avec un scalp.
+Setup B — Scalping Rejet résistance
+
+Même logique inversée.
+
+Conditions
+Prix arrive sur une résistance M15/M5.
+Prise de liquidité au-dessus d’un ancien high.
+Rejet net.
+MSS baissier M1/M3.
+Entrée
+Retest après cassure de micro-structure.
+Retour dans une FVG baissière.
+Entrée après confirmation, pas sur simple “ça monte trop”.
+Stop
+
+Au-dessus du high de manipulation.
+
+TP
+TP1 : dernier creux M1/M5.
+TP2 : support intraday suivant.
+Setup C — Scalping Breakout Retest
+Conditions
+
+Le prix casse une zone importante avec force.
+
+Mais attention : sur le Gold, beaucoup de breakouts sont des pièges.
+
+Validation obligatoire
+
+Tu veux voir :
+
+cassure impulsive ;
+clôture nette au-dessus/dessous de la zone ;
+pullback propre ;
+rejet du retest ;
+continuation.
+Entrée
+
+Sur le retest, pas sur la bougie de cassure.
+
+Stop
+
+Derrière la zone cassée.
+
+TP
+Première extension du mouvement.
+Niveau de liquidité suivant.
+Règles de risque Scalping
+
+Pour le scalping, je serais strict :
+
+Risque par trade : 0,25 % à 0,5 % maximum.
+Maximum 3 pertes par jour.
+Maximum 3 trades par session.
+Si deux pertes d’affilée : pause obligatoire.
+Ne jamais moyenner une position perdante.
+Ne jamais déplacer le SL “pour laisser respirer”.
+Ce qu’il faut éviter
+Trader chaque micro-mouvement.
+Entrer parce que “ça part vite”.
+Scalper en plein range sans bornes claires.
+Scalper juste avant CPI, NFP, FOMC, taux, Powell.
+Chercher 100 points avec une entrée M1.
+Résumé Scalping
+
+Le scalping Gold doit être chirurgical :
+
+Une zone claire, une prise de liquidité, un rejet, une cassure de structure courte, une entrée propre, un stop court, une sortie rapide.
+
+2. Plan d’action Intraday Gold
+Objectif
+
+Prendre un mouvement de session, souvent entre Londres et New York, sans garder la position plusieurs jours.
+
+L’intraday est probablement le meilleur compromis sur le Gold : moins nerveux que le scalping, mais plus réactif que le swing.
+
+Timeframes utilisés
+Daily : biais général.
+H4 : structure principale.
+H1 : tendance de journée.
+M15 : confirmation.
+M5 : entrée précise.
+Préparation avant trading
+
+Avant de trader, tu fais toujours cette routine.
+
+Étape 1 — Définir le biais Daily/H4
+
+Tu regardes :
+
+tendance Daily ;
+structure H4 ;
+derniers hauts/bas significatifs ;
+zones de support/résistance ;
+EMA20 / SMA50 / SMA200 si tu les utilises ;
+zones de liquidité évidentes.
+
+Tu dois répondre à une question simple :
+
+Aujourd’hui, est-ce que je préfère chercher des longs, des shorts, ou rester neutre ?
+
+Si tu n’arrives pas à répondre clairement, tu ne forces pas.
+
+Étape 2 — Marquer les zones importantes
+
+Tu marques :
+
+high de la veille ;
+low de la veille ;
+open daily ;
+zones H4/H1 ;
+plus haut/bas asiatique ;
+grosses zones psychologiques : 2400, 2450, 2500, etc. selon le niveau du marché ;
+zones de déséquilibre/FVG H1/M15.
+
+Le Gold adore faire :
+
+prise de liquidité ;
+rejet ;
+mouvement directionnel.
+Étape 3 — Choisir ton scénario principal
+
+Tu ne dois pas avoir 15 scénarios.
+
+Tu dois avoir :
+
+scénario long prioritaire ;
+scénario short alternatif ;
+zone où tu ne fais rien.
+Setup A — Intraday Long après prise de liquidité basse
+Logique
+
+Le marché descend chercher la liquidité sous un support ou sous le low asiatique, puis rejette et repart à la hausse.
+
+Conditions
+Biais H4/H1 plutôt haussier ou neutre.
+Le prix arrive sur une zone support.
+Il chasse un ancien low.
+Il réintègre rapidement la zone.
+MSS haussier M15 ou M5.
+Validation
+
+Tu veux voir :
+
+mèche basse nette ;
+clôture de réintégration ;
+cassure d’un dernier sommet M5/M15 ;
+idéalement FVG haussière après impulsion.
+Entrée
+
+Trois types d’entrée possibles :
+
+Entrée prudente
+
+Après clôture M15 confirmée au-dessus de la micro-structure.
+
+Entrée équilibrée
+
+Sur pullback M5/M15 après MSS.
+
+Entrée agressive
+
+Sur rejet M5 dans la zone, mais uniquement si le contexte H1/H4 est très clair.
+
+Stop-loss
+
+Sous :
+
+la mèche de prise de liquidité ;
+ou sous le dernier creux M15.
+
+Pas trop serré. En intraday Gold, un stop trop court se fait souvent balayer.
+
+Take profit
+
+Objectifs possibles :
+
+TP1 : open daily ;
+TP2 : high asiatique ;
+TP3 : high de la veille ;
+TP final : résistance H1/H4.
+Gestion
+À TP1 : prendre une partie.
+Après TP1 : stop réduit ou BE selon volatilité.
+Si le prix bloque sur une résistance M15/H1 : prendre les gains.
+Ne pas transformer un intraday en swing parce que tu refuses de sortir.
+Setup B — Intraday Short après prise de liquidité haute
+Logique
+
+Le marché monte chercher les stops au-dessus d’une résistance ou du high asiatique, puis rejette.
+
+Conditions
+Biais H4/H1 baissier ou neutre.
+Arrivée sur résistance claire.
+Prise de liquidité au-dessus d’un high.
+Rejet.
+MSS baissier M15/M5.
+Validation
+Mèche haute nette.
+Clôture sous la zone.
+Cassure d’un creux M5/M15.
+Retest rejeté.
+Entrée
+
+Sur retest après cassure de structure.
+
+Stop
+
+Au-dessus du sommet de manipulation.
+
+TP
+TP1 : open daily ;
+TP2 : low asiatique ;
+TP3 : low de la veille ;
+TP final : support H1/H4.
+Setup C — Intraday Trend Continuation
+Logique
+
+Le marché est déjà directionnel. Tu ne cherches pas le retournement, tu cherches à entrer dans la tendance.
+
+Conditions Long
+Daily/H4 haussier.
+H1 imprime des creux ascendants.
+Le prix corrige vers EMA20/zone H1/FVG.
+Rejet propre.
+Confirmation M15.
+Conditions Short
+Daily/H4 baissier.
+H1 imprime des sommets descendants.
+Pullback vers résistance.
+Rejet.
+Confirmation M15.
+Entrée
+
+Sur pullback, jamais en poursuite au milieu de nulle part.
+
+Stop
+
+Derrière le dernier point structurel M15/H1.
+
+TP
+
+Sur prochaine zone de liquidité ou résistance/support H1/H4.
+
+Règles de risque Intraday
+
+Pour l’intraday :
+
+Risque par trade : 0,5 % à 1 % maximum.
+Maximum 2 à 3 trades par jour.
+Si perte sur le scénario principal, ne pas se venger avec le scénario opposé.
+Si le marché n’atteint pas les zones prévues : pas de trade.
+Pas de trade “par ennui”.
+Routine intraday simple
+
+Avant la session :
+
+Identifier biais Daily/H4.
+Marquer high/low veille.
+Marquer high/low asiatique.
+Marquer zones H1/M15.
+Choisir scénario long/short.
+Attendre prise de liquidité ou retest.
+Entrer seulement après confirmation.
+Gérer partiellement.
+Clôturer avant fin de journée.
+Résumé Intraday
+
+En intraday, tu ne trades pas le bruit. Tu trades une réaction claire sur une zone importante, avec confirmation M15/M5, puis tu sors avant que le marché ne change de régime.
+
+3. Plan d’action Swing Trading Gold
+Objectif
+
+Prendre des mouvements plus larges sur plusieurs jours ou semaines.
+
+Ici, tu ne cherches pas le point parfait au dollar près. Tu cherches une zone de prix logique, un biais macro/technique, et une structure favorable.
+
+Timeframes utilisés
+Monthly : grande tendance.
+Weekly : structure majeure.
+Daily : biais de swing.
+H4 : timing.
+H1 : entrée affinée.
+Logique générale
+
+Le swing sur Gold doit s’appuyer sur :
+
+tendance Weekly/Daily ;
+zones de support/résistance majeures ;
+retracement Fibonacci ;
+cassure/retest Daily/H4 ;
+structure Elliott si tu l’utilises ;
+moyennes mobiles majeures ;
+contexte macro général : dollar, taux, inflation, risque géopolitique.
+
+Même si ton plan est technique, sur le swing Gold, tu ne peux pas totalement ignorer le contexte macro.
+
+Préparation Swing
+
+Chaque week-end, tu fais ton analyse.
+
+Étape 1 — Monthly / Weekly
+
+Tu regardes :
+
+tendance dominante ;
+derniers sommets/bas majeurs ;
+cassures importantes ;
+zones historiques ;
+clôtures weekly ;
+excès de prix.
+
+Question :
+
+Le Gold est-il en tendance haussière, baissière, ou en range majeur ?
+
+Étape 2 — Daily
+
+Tu cherches :
+
+creux/sommets Daily ;
+zones de retracement ;
+supports/résistances propres ;
+cassure de structure ;
+compression avant impulsion ;
+divergence éventuelle ;
+position par rapport aux moyennes mobiles.
+Étape 3 — H4
+
+Tu utilises H4 pour trouver l’entrée :
+
+pullback ;
+rejet ;
+cassure/retest ;
+FVG ;
+OB ;
+MSS ;
+compression/cassure.
+Setup A — Swing Long sur retracement haussier
+Logique
+
+La tendance principale est haussière. Le prix corrige vers une zone intéressante. Tu cherches à acheter le repli.
+
+Conditions
+Weekly/Daily haussier.
+Le prix corrige vers un support Daily/H4.
+Zone de retracement Fibonacci intéressante : souvent 38,2 %, 50 % ou 61,8 %.
+Présence d’une ancienne résistance devenue support.
+Rejet Daily ou H4.
+MSS haussier H4/H1.
+Validation
+
+Tu ne rentres pas juste parce que le prix touche une zone.
+
+Tu veux voir :
+
+ralentissement de la baisse ;
+mèche de rejet ;
+avalement ou clôture forte ;
+cassure d’un sommet H4/H1 ;
+pullback confirmé.
+Entrée
+
+Plusieurs possibilités :
+
+Entrée conservatrice
+
+Après clôture Daily de rejet.
+
+Entrée équilibrée
+
+Après MSS H4 puis pullback.
+
+Entrée agressive
+
+Sur rejet H4 dans la zone, avec stop large sous le support.
+
+Stop-loss
+
+Sous :
+
+le support Daily ;
+le dernier creux H4 ;
+ou le niveau d’invalidation technique.
+
+Le stop swing doit respirer. Si tu mets un stop M15 sur un swing, tu vas te faire sortir pour rien.
+
+Take profit
+
+Objectifs possibles :
+
+TP1 : ancien sommet H4 ;
+TP2 : ancien high Daily ;
+TP3 : extension Fibonacci ;
+TP final : résistance Weekly.
+Gestion
+Prise partielle à TP1.
+Stop remonté sous un creux H4.
+Ne pas mettre BE trop vite.
+Laisser vivre si la structure Daily reste saine.
+Sortir si clôture Daily invalide le scénario.
+Setup B — Swing Short sur rejet de résistance majeure
+Logique
+
+Le prix arrive sur une résistance Weekly/Daily, montre de l’épuisement, puis casse sa structure H4.
+
+Conditions
+Weekly/Daily en range ou baissier.
+Résistance majeure atteinte.
+Excès haussier ou prise de liquidité.
+Rejet Daily/H4.
+MSS baissier H4.
+Retest rejeté.
+Validation
+Mèche haute Weekly/Daily ou rejet H4 clair.
+Cassure du dernier creux H4.
+Pullback sous résistance.
+Volume/impulsion si disponible.
+Entrée
+Après cassure H4.
+Sur retest H4/H1.
+Pas sur simple “c’est trop haut”.
+Stop
+
+Au-dessus du sommet de rejet ou au-dessus de la résistance Daily.
+
+TP
+TP1 : support H4.
+TP2 : support Daily.
+TP3 : zone Weekly ou retracement profond.
+Setup C — Swing Breakout Retest Daily
+Logique
+
+Le Gold sort d’un range Daily ou Weekly. Tu attends le retest pour entrer dans la nouvelle tendance.
+
+Conditions Long
+Clôture Daily/Weekly au-dessus d’une résistance majeure.
+Cassure nette, pas simple mèche.
+Retest de l’ancienne résistance.
+Rejet H4/Daily.
+Reprise haussière.
+Conditions Short
+Clôture Daily/Weekly sous un support majeur.
+Retest par-dessous.
+Rejet.
+Reprise baissière.
+Entrée
+
+Sur retest confirmé.
+
+Stop
+
+Derrière la zone cassée.
+
+TP
+Hauteur du range projetée.
+Prochaine zone Weekly.
+Extension Fibonacci.
+Règles de risque Swing
+
+Pour le swing :
+
+Risque par trade : 0,5 % à 1,5 % maximum.
+Ne pas surcharger plusieurs positions corrélées.
+Ne pas entrer avec un levier trop fort.
+Accepter des respirations importantes.
+Ne pas surveiller toutes les 5 minutes si le plan est Daily/H4.
+Toujours connaître la date des grosses annonces macro.
+Gestion Swing
+
+Sur un swing, tu ne dois pas paniquer à chaque bougie H1.
+
+Tu gères plutôt avec :
+
+clôtures H4 ;
+clôtures Daily ;
+structure des creux/sommets ;
+cassure du dernier point clé ;
+réaction sur les zones prévues.
+Résumé Swing
+
+Le swing Gold se construit sur Weekly/Daily, s’exécute sur H4/H1, et se gère avec patience. Tu ne cherches pas le scalp parfait, tu cherches un mouvement large avec une invalidation logique.
+
+Comparatif des 3 plans
+Type	Durée	TF principal	Entrée	Stop	Objectif	Risque conseillé
+Scalping	minutes à 1h	M5/M1	très précise	court	rapide	0,25 % à 0,5 %
+Intraday	quelques heures	H1/M15	confirmée	moyen	mouvement de session	0,5 % à 1 %
+Swing	jours/semaines	Daily/H4	patiente	large	mouvement majeur	0,5 % à 1,5 %
+La règle centrale pour les 3 plans
+
+La structure doit toujours être la même :
+
+1. Contexte
+
+Tu définis le biais.
+
+Haussier ?
+Baissier ?
+Range ?
+Neutre ?
+2. Zone
+
+Tu attends que le prix arrive sur une zone importante.
+
+Support.
+Résistance.
+Liquidité.
+FVG.
+Fibonacci.
+Ancien high/low.
+3. Réaction
+
+Tu attends une réaction visible.
+
+Rejet.
+Mèche.
+Réintégration.
+Clôture forte.
+Cassure de structure.
+4. Confirmation
+
+Tu ne rentres pas au hasard.
+
+MSS.
+Retest.
+FVG.
+Pullback.
+Breakout confirmé.
+5. Invalidation
+
+Tu sais exactement où ton idée est fausse.
+
+Si ce niveau est cassé, tu sors.
+
+6. Gestion
+
+Tu sais à l’avance :
+
+où prendre partiellement ;
+où sécuriser ;
+où sortir totalement ;
+quoi faire si le prix ne part pas.
+Règles communes obligatoires
+Règle 1 — Pas de zone, pas de trade
+
+Si le prix est au milieu de nulle part, tu ne fais rien.
+
+Règle 2 — Pas de confirmation, pas de trade
+
+Une zone seule ne suffit pas.
+
+Le prix peut traverser une zone comme du beurre. Il faut une réaction.
+
+Règle 3 — Pas de SL logique, pas de trade
+
+Si tu ne sais pas où mettre le stop, le trade n’existe pas.
+
+Règle 4 — Pas de TP clair, pas de trade
+
+Un trade sans objectif devient une prière.
+
+Règle 5 — Une perte propre vaut mieux qu’un trade bricolé
+
+Une perte respectée, c’est normal.
+Un stop déplacé, c’est une faute.
+
+Routine hebdomadaire Gold
+
+Chaque dimanche ou lundi matin :
+
+Analyse Monthly.
+Analyse Weekly.
+Analyse Daily.
+Marquage des zones majeures.
+Identification du biais de fond.
+Préparation de 2 scénarios swing.
+Préparation des zones intraday.
+Liste des news importantes de la semaine.
+Définition du risque maximum hebdomadaire.
+Routine quotidienne Gold
+
+Avant de trader :
+
+Regarder Daily/H4.
+Identifier le biais du jour.
+Marquer high/low de la veille.
+Marquer high/low asiatique.
+Identifier les zones H1/M15.
+Définir :
+scénario long ;
+scénario short ;
+zone d’abstention.
+Attendre la session.
+Attendre la réaction.
+Entrer uniquement après validation.
+Journaliser le trade.
+Check-list avant chaque trade
+
+Avant de cliquer, tu dois pouvoir répondre oui à tout :
+
+Question	Oui / Non
+Ai-je identifié le biais ?	
+Suis-je sur une vraie zone ?	
+Y a-t-il une réaction claire ?	
+Ai-je une confirmation ?	
+Mon stop est-il logique ?	
+Mon TP est-il réaliste ?	
+Mon risque est-il acceptable ?	
+Le ratio R/R est-il correct ?	
+Suis-je dans une bonne session ?	
+Est-ce que je prends ce trade calmement ?	
+
+Si tu as deux “non”, tu ne prends pas le trade.
+
+Ratios minimums
+Scalping
+
+Minimum : 1:1,5
+Idéal : 1:2
+
+Intraday
+
+Minimum : 1:2
+Idéal : 1:3
+
+Swing
+
+Minimum : 1:2,5
+Idéal : 1:4 ou plus
+
+Règles de pertes
+Journée
+2 pertes propres : prudence.
+3 pertes : journée terminée.
+Perte émotionnelle : journée terminée immédiatement.
+Semaine
+-3 % sur la semaine : réduction de risque.
+-5 % sur la semaine : stop trading jusqu’à revue complète.
+Mois
+Si le mois commence mal, réduire la taille.
+Ne jamais essayer de “rattraper” le mois en augmentant le levier.
+Journal de trading obligatoire
+
+Pour chaque trade, tu notes :
+
+date ;
+type : scalp / intraday / swing ;
+biais ;
+setup ;
+zone ;
+raison d’entrée ;
+SL ;
+TP ;
+résultat ;
+erreur éventuelle ;
+capture avant/après.
+
+Et surtout :
+
+Est-ce que j’ai respecté mon plan, oui ou non ?
+
+Pas : “Est-ce que j’ai gagné ?”
+Le plus important, c’est l’exécution.
+
+Synthèse finale
+Scalping
+
+À utiliser uniquement quand tu es concentré, devant l’écran, sur une session active.
+
+Zone M5/M15 → prise de liquidité → MSS M1/M3 → entrée courte → sortie rapide.
+
+Intraday
+
+C’est ton plan principal le plus équilibré.
+
+Biais Daily/H4 → zone H1/M15 → confirmation M15/M5 → mouvement de session → sortie avant fin de journée.
+
+Swing
+
+À utiliser quand le marché offre une vraie zone Daily/Weekly.
+
+Structure Weekly/Daily → retracement ou breakout → confirmation H4 → gestion sur plusieurs jours.
+
+Mon avis direct
+
+Pour toi, je mettrais la priorité comme ça :
+
+Intraday : ton meilleur terrain de jeu. Tu as assez de structure pour éviter le bruit, mais assez de réactivité pour gérer proprement.
+Swing : excellent pour les grosses opportunités, mais il faut accepter les respirations.
+Scalping : à utiliser avec parcimonie. Le Gold peut te massacrer si tu le scalp sans discipline.
+
+Le meilleur cadre global serait :
+
+Swing pour le biais de fond, intraday pour les vrais trades, scalping uniquement pour affiner ou exploiter une opportunité très propre.

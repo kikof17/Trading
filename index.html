@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trading Planner XAUUSD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">XAUUSD analysis workspace</p>
+        <h1>Plans Gold pilotés par vos captures multi-timeframe</h1>
+        <p class="hero-copy">
+          Déposez vos vues MT5, mettez à jour le prix dans la journée et obtenez un cadre d'analyse aligné sur votre stratégie scalping, intraday et swing.
+        </p>
+      </div>
+      <section class="hero-card">
+        <label class="field-label" for="capital">Capital de référence</label>
+        <div class="capital-row">
+          <input id="capital" name="capital" type="number" min="0" step="0.01" placeholder="10000">
+          <span class="currency">USD</span>
+        </div>
+        <label class="field-label" for="price">Cours XAUUSD</label>
+        <input id="price" name="price" type="number" min="0" step="0.01" placeholder="2368.20">
+        <label class="field-label" for="sessionNote">Contexte du moment</label>
+        <textarea id="sessionNote" name="sessionNote" rows="3" placeholder="Exemple : Londres ouverte, rejet du low asiatique, CPI demain."></textarea>
+        <button id="saveOverview" class="ghost-button" type="button">Enregistrer le contexte</button>
+        <p id="saveFeedback" class="save-feedback" aria-live="polite"></p>
+      </section>
+    </header>
+
+    <main>
+      <section class="top-grid">
+        <article class="panel strategy-panel">
+          <div class="panel-title-row">
+            <div>
+              <p class="panel-kicker">Méthode</p>
+              <h2>Cadre de décision embarqué</h2>
+            </div>
+            <span class="status-pill">Local</span>
+          </div>
+          <div class="strategy-grid">
+            <div>
+              <h3>Scalping</h3>
+              <p>Zone M5/M15, confirmation M1/M3, risque 0,25 % à 0,5 %, 1 à 3 trades propres.</p>
+            </div>
+            <div>
+              <h3>Intraday</h3>
+              <p>Biais Daily/H4, validation M15/M5, mouvement de session, risque 0,5 % à 1 %.</p>
+            </div>
+            <div>
+              <h3>Swing</h3>
+              <p>Structure Weekly/Daily, exécution H4/H1, objectif large, risque 0,5 % à 1,5 %.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel ai-panel">
+          <div class="panel-title-row">
+            <div>
+              <p class="panel-kicker">Vision assistée</p>
+              <h2>Analyse IA optionnelle</h2>
+            </div>
+          </div>
+          <p class="panel-copy">
+            L'application fonctionne sans backend. Pour obtenir une lecture automatique des captures, renseignez un endpoint compatible OpenAI et une clé API. Sinon, l'application génère un plan guidé à partir de vos captures, notes et règles de stratégie.
+          </p>
+          <div class="ai-grid">
+            <label>
+              <span class="field-label">Endpoint</span>
+              <input id="apiEndpoint" type="url" placeholder="https://api.openai.com/v1/responses">
+            </label>
+            <label>
+              <span class="field-label">Clé API</span>
+              <input id="apiKey" type="password" placeholder="sk-...">
+            </label>
+            <label>
+              <span class="field-label">Modèle</span>
+              <input id="apiModel" type="text" placeholder="gpt-4.1-mini">
+            </label>
+            <button id="saveAiConfig" class="ghost-button" type="button">Sauver la config IA</button>
+          </div>
+          <p id="aiFeedback" class="save-feedback" aria-live="polite"></p>
+        </article>
+      </section>
+
+      <section class="tabs-panel panel">
+        <div class="tabs-header" role="tablist" aria-label="Plans de trading">
+          <button class="tab-button active" data-tab="scalping" role="tab" aria-selected="true">Scalping</button>
+          <button class="tab-button" data-tab="intraday" role="tab" aria-selected="false">Intraday</button>
+          <button class="tab-button" data-tab="swing" role="tab" aria-selected="false">Swing</button>
+        </div>
+
+        <section class="tab-content active" data-content="scalping">
+          <div class="tab-layout">
+            <form class="analysis-form" data-plan="scalping">
+              <div class="section-header">
+                <div>
+                  <p class="panel-kicker">Plan court</p>
+                  <h2>Scalping XAUUSD</h2>
+                </div>
+                <span class="status-pill warm">Risque 0,25 % à 0,5 %</span>
+              </div>
+              <p class="required-timeframes">Captures utiles : H1, M15, M5, M3, M1.</p>
+              <div class="input-grid">
+                <label>
+                  <span class="field-label">Biais minute</span>
+                  <select name="bias">
+                    <option value="Long">Long</option>
+                    <option value="Short">Short</option>
+                    <option value="Neutre" selected>Neutre</option>
+                  </select>
+                </label>
+                <label>
+                  <span class="field-label">Session</span>
+                  <select name="session">
+                    <option value="Londres">Londres</option>
+                    <option value="US">US</option>
+                    <option value="Hors session" selected>Hors session</option>
+                  </select>
+                </label>
+                <label>
+                  <span class="field-label">Risque %</span>
+                  <input name="riskPercent" type="number" min="0.1" max="2" step="0.05" value="0.5">
+                </label>
+                <label>
+                  <span class="field-label">Entrée envisagée</span>
+                  <input name="entry" type="number" step="0.01" placeholder="2368.20">
+                </label>
+                <label>
+                  <span class="field-label">Invalidation / SL</span>
+                  <input name="stop" type="number" step="0.01" placeholder="2365.80">
+                </label>
+                <label>
+                  <span class="field-label">Cible principale</span>
+                  <input name="target" type="number" step="0.01" placeholder="2372.10">
+                </label>
+              </div>
+              <label>
+                <span class="field-label">Lecture des captures</span>
+                <textarea name="notes" rows="6" placeholder="Exemple : prise de liquidité sous le low européen, rejet net, MSS haussier M1, FVG M3 sur retest."></textarea>
+              </label>
+              <label>
+                <span class="field-label">Mise à jour intrajournalière</span>
+                <textarea name="updates" rows="4" placeholder="Exemple : 10h12, TP1 touché, ralentissement sous résistance M5."></textarea>
+              </label>
+              <label class="upload-zone">
+                <span class="field-label">Captures</span>
+                <input class="image-input" name="images" type="file" accept="image/*" multiple>
+                <span>Glissez, collez ou sélectionnez vos vues MT5.</span>
+              </label>
+              <div class="action-row">
+                <button class="primary-button" type="submit">Générer le plan scalping</button>
+                <button class="ghost-button save-plan" type="button">Sauvegarder l'onglet</button>
+                <button class="ghost-button clear-images" type="button">Effacer les captures</button>
+              </div>
+            </form>
+            <section class="output-panel">
+              <div class="output-header">
+                <h3>Analyse et plan</h3>
+                <button class="ghost-button ai-runner" data-plan="scalping" type="button">Analyse IA</button>
+              </div>
+              <div class="image-preview" data-preview="scalping"></div>
+              <article class="result-card" data-result="scalping">
+                <p>Le plan scalping apparaîtra ici.</p>
+              </article>
+            </section>
+          </div>
+        </section>
+
+        <section class="tab-content" data-content="intraday">
+          <div class="tab-layout">
+            <form class="analysis-form" data-plan="intraday">
+              <div class="section-header">
+                <div>
+                  <p class="panel-kicker">Plan session</p>
+                  <h2>Intraday XAUUSD</h2>
+                </div>
+                <span class="status-pill cool">Risque 0,5 % à 1 %</span>
+              </div>
+              <p class="required-timeframes">Captures utiles : Daily, H4, H1, M15, M5.</p>
+              <div class="input-grid">
+                <label>
+                  <span class="field-label">Biais du jour</span>
+                  <select name="bias">
+                    <option value="Long">Long</option>
+                    <option value="Short">Short</option>
+                    <option value="Neutre" selected>Neutre</option>
+                  </select>
+                </label>
+                <label>
+                  <span class="field-label">Scénario principal</span>
+                  <input name="scenario" type="text" placeholder="Sweep du low asiatique puis reprise haussière">
+                </label>
+                <label>
+                  <span class="field-label">Risque %</span>
+                  <input name="riskPercent" type="number" min="0.1" max="2" step="0.05" value="1">
+                </label>
+                <label>
+                  <span class="field-label">Entrée envisagée</span>
+                  <input name="entry" type="number" step="0.01" placeholder="2368.20">
+                </label>
+                <label>
+                  <span class="field-label">Invalidation / SL</span>
+                  <input name="stop" type="number" step="0.01" placeholder="2360.50">
+                </label>
+                <label>
+                  <span class="field-label">Cible principale</span>
+                  <input name="target" type="number" step="0.01" placeholder="2384.00">
+                </label>
+              </div>
+              <label>
+                <span class="field-label">Lecture des zones</span>
+                <textarea name="notes" rows="6" placeholder="Exemple : biais H4 haussier, support H1 sur open daily, FVG M15 sous le high asiatique."></textarea>
+              </label>
+              <label>
+                <span class="field-label">Mise à jour intrajournalière</span>
+                <textarea name="updates" rows="4" placeholder="Exemple : 14h38, prise de liquidité au-dessus du high de Londres, rejet M5 confirmé."></textarea>
+              </label>
+              <label class="upload-zone">
+                <span class="field-label">Captures</span>
+                <input class="image-input" name="images" type="file" accept="image/*" multiple>
+                <span>Ajoutez vos vues de contexte et d'exécution.</span>
+              </label>
+              <div class="action-row">
+                <button class="primary-button" type="submit">Générer le plan intraday</button>
+                <button class="ghost-button save-plan" type="button">Sauvegarder l'onglet</button>
+                <button class="ghost-button clear-images" type="button">Effacer les captures</button>
+              </div>
+            </form>
+            <section class="output-panel">
+              <div class="output-header">
+                <h3>Analyse et plan</h3>
+                <button class="ghost-button ai-runner" data-plan="intraday" type="button">Analyse IA</button>
+              </div>
+              <div class="image-preview" data-preview="intraday"></div>
+              <article class="result-card" data-result="intraday">
+                <p>Le plan intraday apparaîtra ici.</p>
+              </article>
+            </section>
+          </div>
+        </section>
+
+        <section class="tab-content" data-content="swing">
+          <div class="tab-layout">
+            <form class="analysis-form" data-plan="swing">
+              <div class="section-header">
+                <div>
+                  <p class="panel-kicker">Plan positionnel</p>
+                  <h2>Swing XAUUSD</h2>
+                </div>
+                <span class="status-pill deep">Risque 0,5 % à 1,5 %</span>
+              </div>
+              <p class="required-timeframes">Captures utiles : Weekly, Daily, H4, H1.</p>
+              <div class="input-grid">
+                <label>
+                  <span class="field-label">Biais de fond</span>
+                  <select name="bias">
+                    <option value="Long">Long</option>
+                    <option value="Short">Short</option>
+                    <option value="Neutre" selected>Neutre</option>
+                  </select>
+                </label>
+                <label>
+                  <span class="field-label">Scénario majeur</span>
+                  <input name="scenario" type="text" placeholder="Pullback Daily vers support puis reprise">
+                </label>
+                <label>
+                  <span class="field-label">Risque %</span>
+                  <input name="riskPercent" type="number" min="0.1" max="3" step="0.1" value="1.5">
+                </label>
+                <label>
+                  <span class="field-label">Entrée envisagée</span>
+                  <input name="entry" type="number" step="0.01" placeholder="2342.00">
+                </label>
+                <label>
+                  <span class="field-label">Invalidation / SL</span>
+                  <input name="stop" type="number" step="0.01" placeholder="2310.00">
+                </label>
+                <label>
+                  <span class="field-label">Cible principale</span>
+                  <input name="target" type="number" step="0.01" placeholder="2410.00">
+                </label>
+              </div>
+              <label>
+                <span class="field-label">Contexte macro-technique</span>
+                <textarea name="notes" rows="6" placeholder="Exemple : Weekly haussier, retracement 50 % Daily, rejet H4, dollar en consolidation."></textarea>
+              </label>
+              <label>
+                <span class="field-label">Suivi du plan</span>
+                <textarea name="updates" rows="4" placeholder="Exemple : Daily clôture au-dessus du support, structure toujours valide."></textarea>
+              </label>
+              <label class="upload-zone">
+                <span class="field-label">Captures</span>
+                <input class="image-input" name="images" type="file" accept="image/*" multiple>
+                <span>Ajoutez vos captures de structure et de timing.</span>
+              </label>
+              <div class="action-row">
+                <button class="primary-button" type="submit">Générer le plan swing</button>
+                <button class="ghost-button save-plan" type="button">Sauvegarder l'onglet</button>
+                <button class="ghost-button clear-images" type="button">Effacer les captures</button>
+              </div>
+            </form>
+            <section class="output-panel">
+              <div class="output-header">
+                <h3>Analyse et plan</h3>
+                <button class="ghost-button ai-runner" data-plan="swing" type="button">Analyse IA</button>
+              </div>
+              <div class="image-preview" data-preview="swing"></div>
+              <article class="result-card" data-result="swing">
+                <p>Le plan swing apparaîtra ici.</p>
+              </article>
+            </section>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <template id="previewItemTemplate">
+    <figure class="preview-item">
+      <img alt="Capture graphique">
+      <figcaption></figcaption>
+    </figure>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
