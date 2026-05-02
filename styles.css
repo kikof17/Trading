@@ -178,11 +178,17 @@ button:focus {
 .strategy-grid p,
 .panel-copy,
 .required-timeframes,
+.auto-hint,
 .save-feedback,
 .result-card p,
 .result-card li {
   color: var(--muted);
   line-height: 1.55;
+}
+
+.auto-hint {
+  margin: -6px 0 0;
+  font-size: 0.94rem;
 }
 
 .tabs-panel {

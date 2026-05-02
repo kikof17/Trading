@@ -100,7 +100,8 @@ function emptyPlanState() {
   return {
     fields: {},
     images: [],
-    resultHtml: ""
+    resultHtml: "",
+    aiSummary: null
   };
 }
 
@@ -178,10 +179,11 @@ function initializeForms() {
     const imageInput = form.querySelector(".image-input");
     const browseButton = form.querySelector(".browse-images");
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
+      syncOverviewFromDom();
       saveFormState(form, planName);
-      generateLocalAnalysis(planName);
+      await runPlanGeneration(planName);
     });
 
     form.querySelector(".save-plan").addEventListener("click", () => {
@@ -191,6 +193,7 @@ function initializeForms() {
 
     form.querySelector(".clear-images").addEventListener("click", () => {
       state.plans[planName].images = [];
+      state.plans[planName].aiSummary = null;
       persistState();
       hydratePlan(planName);
     });
@@ -254,6 +257,18 @@ function initializeForms() {
       hydratePlan(planName);
     });
   });
+}
+
+async function runPlanGeneration(planName) {
+  const config = loadAiConfig();
+  const plan = state.plans[planName];
+
+  if (config.endpoint && config.apiKey && config.model && plan.images.length) {
+    await runAiAnalysis(planName, { autoFill: true });
+    return;
+  }
+
+  generateLocalAnalysis(planName, { automationRequested: true });
 }
 
 function extractPastedImages(clipboardData) {
@@ -336,7 +351,7 @@ function renderPreview(container, images) {
   });
 }
 
-function generateLocalAnalysis(planName) {
+function generateLocalAnalysis(planName, options = {}) {
   const planState = state.plans[planName];
   const profile = strategyProfiles[planName];
   const capital = Number.parseFloat(state.overview.capital) || 0;
@@ -350,11 +365,22 @@ function generateLocalAnalysis(planName) {
   const targetDistance = entry && target ? Math.abs(target - entry) : 0;
   const rr = stopDistance ? targetDistance / stopDistance : 0;
   const ounces = stopDistance ? riskAmount / stopDistance : 0;
-  const verdict = buildVerdict(planName, rr, livePrice, entry, stop, target);
-  const scenarioText = planState.fields.scenario || planState.fields.notes || "Lecture à compléter depuis les captures.";
-  const notes = planState.fields.notes || "Aucune note complémentaire saisie.";
+  const verdict = buildVerdict(planName, rr, livePrice, entry, stop, target, options.automationRequested);
+  const scenarioText = planState.fields.scenario || planState.aiSummary?.scenario || planState.fields.notes || "Lecture à compléter depuis les captures.";
+  const notes = planState.fields.notes || planState.aiSummary?.notes || "Aucune note complémentaire saisie.";
   const updates = planState.fields.updates || "Aucune mise à jour intrajournalière pour le moment.";
   const session = planState.fields.session || "Session à préciser";
+  const aiTimeframes = Array.isArray(planState.aiSummary?.timeframesRead) && planState.aiSummary.timeframesRead.length
+    ? planState.aiSummary.timeframesRead.join(", ")
+    : "Non précisé";
+  const aiLevels = Array.isArray(planState.aiSummary?.keyLevels) && planState.aiSummary.keyLevels.length
+    ? planState.aiSummary.keyLevels.map((level) => `<li>${escapeHtml(level)}</li>`).join("")
+    : "<li>Niveaux à confirmer.</li>";
+  const aiChecks = Array.isArray(planState.aiSummary?.confirmationChecklist) && planState.aiSummary.confirmationChecklist.length
+    ? planState.aiSummary.confirmationChecklist.map((item) => `<li>${escapeHtml(item)}</li>`).join("")
+    : `<li>${profile.prompts.validation}</li>`;
+  const aiManagement = planState.aiSummary?.management || profile.prompts.management;
+  const aiInvalidation = planState.aiSummary?.invalidation || "Invalidation à préciser.";
 
   const html = `
     <div class="result-block">
@@ -370,14 +396,19 @@ function generateLocalAnalysis(planName) {
         <li><strong>Contexte global :</strong> ${escapeHtml(state.overview.sessionNote || "Non renseigné")}</li>
         <li><strong>Session :</strong> ${escapeHtml(session)}</li>
         <li><strong>Cours actuel :</strong> ${livePrice ? livePrice.toFixed(2) : "Non renseigné"}</li>
+        <li><strong>Timeframes lus :</strong> ${escapeHtml(aiTimeframes)}</li>
       </ul>
     </div>
     <div class="result-block">
-      <h4>Validation attendue</h4>
+      <h4>Niveaux et validation</h4>
       <ul>
         <li>${profile.prompts.context}</li>
-        <li>${profile.prompts.validation}</li>
+        ${aiChecks}
         <li>${escapeHtml(notes)}</li>
+        <li><strong>Invalidation :</strong> ${escapeHtml(aiInvalidation)}</li>
+      </ul>
+      <ul>
+        ${aiLevels}
       </ul>
     </div>
     <div class="result-block">
@@ -395,7 +426,7 @@ function generateLocalAnalysis(planName) {
     <div class="result-block">
       <h4>Gestion</h4>
       <ul>
-        <li>${profile.prompts.management}</li>
+        <li>${escapeHtml(aiManagement)}</li>
         <li><strong>Mise à jour :</strong> ${escapeHtml(updates)}</li>
       </ul>
     </div>
@@ -406,8 +437,17 @@ function generateLocalAnalysis(planName) {
   hydratePlan(planName);
 }
 
-function buildVerdict(planName, rr, livePrice, entry, stop, target) {
+function buildVerdict(planName, rr, livePrice, entry, stop, target, automationRequested = false) {
   const profile = strategyProfiles[planName];
+  const aiVerdict = state.plans[planName].aiSummary?.verdict;
+
+  if (aiVerdict) {
+    return aiVerdict;
+  }
+
+  if (automationRequested) {
+    return "Automatisation indisponible : ajoutez une configuration IA valide pour extraire automatiquement le plan depuis les captures.";
+  }
 
   if (!entry || !stop || !target) {
     return "Plan incomplet : définir entrée, stop et cible avant exécution.";
@@ -441,7 +481,7 @@ function showFeedback(elementId, message) {
   }, 2200);
 }
 
-async function runAiAnalysis(planName) {
+async function runAiAnalysis(planName, options = { autoFill: false }) {
   const config = loadAiConfig();
   if (!config.endpoint || !config.apiKey || !config.model) {
     showFeedback("aiFeedback", "Renseignez endpoint, clé API et modèle avant l'analyse IA.");
@@ -473,13 +513,21 @@ async function runAiAnalysis(planName) {
 
     const data = await response.json();
     const text = extractResponseText(data);
-    plan.resultHtml = `<div class="result-block"><h4>Analyse IA</h4><p>${escapeHtml(text).replace(/\n/g, "<br>")}</p></div>`;
+    const parsedPlan = parseAiPlan(text, planName);
+
+    if (parsedPlan) {
+      applyAiPlan(planName, parsedPlan, options.autoFill);
+      generateLocalAnalysis(planName);
+    } else {
+      plan.resultHtml = `<div class="result-block"><h4>Analyse IA</h4><p>${escapeHtml(text).replace(/\n/g, "<br>")}</p></div>`;
+    }
+
     persistState();
     hydratePlan(planName);
     showFeedback("aiFeedback", `Analyse IA ${planName} terminée.`);
   } catch (error) {
     console.error(error);
-    generateLocalAnalysis(planName);
+    generateLocalAnalysis(planName, { automationRequested: options.autoFill });
     showFeedback("aiFeedback", `Analyse IA indisponible : ${error.message}`);
   }
 }
@@ -496,8 +544,11 @@ function buildAiPayload(planName, model, plan) {
         `Cours actuel : ${state.overview.price || "non renseigné"}.`,
         `Contexte : ${state.overview.sessionNote || "non renseigné"}.`,
         `Champs saisis : ${JSON.stringify(plan.fields)}.`,
-        "Retour attendu : biais, zones clés, validation requise, invalidation, plan d'action, gestion du risque, mise à jour selon le prix courant.",
-        "Réponds en français, avec des sections courtes et opérationnelles."
+        "Retour attendu : un objet JSON brut uniquement, sans markdown ni texte autour.",
+        "Clés obligatoires : bias, session, scenario, entry, stop, target, riskPercent, timeframesRead, keyLevels, confirmationChecklist, invalidation, management, notes, verdict.",
+        "Valeurs attendues : bias dans Long|Short|Neutre, session dans Londres|US|Hors session|null, nombres bruts pour entry/stop/target/riskPercent, tableaux pour timeframesRead/keyLevels/confirmationChecklist.",
+        `Utilise strictement la logique de ce plan : ${profile.focus}.`,
+        "Réponds en français."
       ].join("\n")
     },
     ...plan.images.map((image) => ({
@@ -516,6 +567,141 @@ function buildAiPayload(planName, model, plan) {
       }
     ]
   };
+}
+
+function syncOverviewFromDom() {
+  state.overview.capital = document.getElementById("capital").value;
+  state.overview.price = document.getElementById("price").value;
+  state.overview.sessionNote = document.getElementById("sessionNote").value.trim();
+  persistState();
+}
+
+function parseAiPlan(text, planName) {
+  try {
+    const jsonText = extractJsonObject(text);
+    if (!jsonText) {
+      return null;
+    }
+
+    return normalizeAiPlan(JSON.parse(jsonText), planName);
+  } catch (error) {
+    console.error("AI parse failed", error);
+    return null;
+  }
+}
+
+function extractJsonObject(text) {
+  const start = text.indexOf("{");
+  const end = text.lastIndexOf("}");
+
+  if (start === -1 || end === -1 || end <= start) {
+    return null;
+  }
+
+  return text.slice(start, end + 1);
+}
+
+function normalizeAiPlan(parsed, planName) {
+  return {
+    bias: normalizeEnum(parsed.bias, ["Long", "Short", "Neutre"]) || "Neutre",
+    session: normalizeSession(parsed.session),
+    scenario: sanitizeText(parsed.scenario),
+    entry: normalizeNumber(parsed.entry),
+    stop: normalizeNumber(parsed.stop),
+    target: normalizeNumber(parsed.target),
+    riskPercent: normalizeRiskPercent(parsed.riskPercent, planName),
+    timeframesRead: normalizeArray(parsed.timeframesRead),
+    keyLevels: normalizeArray(parsed.keyLevels),
+    confirmationChecklist: normalizeArray(parsed.confirmationChecklist),
+    invalidation: sanitizeText(parsed.invalidation),
+    management: sanitizeText(parsed.management),
+    notes: sanitizeText(parsed.notes),
+    verdict: sanitizeText(parsed.verdict)
+  };
+}
+
+function applyAiPlan(planName, aiPlan, autoFill) {
+  const planState = state.plans[planName];
+  const nextFields = { ...planState.fields };
+
+  nextFields.bias = aiPlan.bias || nextFields.bias || "Neutre";
+
+  if (planName === "scalping") {
+    nextFields.session = aiPlan.session || nextFields.session || "Hors session";
+  }
+
+  if (planName !== "scalping") {
+    nextFields.scenario = aiPlan.scenario || nextFields.scenario || "";
+  }
+
+  nextFields.entry = formatNumericField(aiPlan.entry);
+  nextFields.stop = formatNumericField(aiPlan.stop);
+  nextFields.target = formatNumericField(aiPlan.target);
+  nextFields.riskPercent = formatNumericField(aiPlan.riskPercent) || defaultRiskForPlan(planName);
+  nextFields.notes = aiPlan.notes || nextFields.notes || "";
+
+  if (autoFill && !nextFields.updates) {
+    nextFields.updates = "Plan généré automatiquement depuis les captures. Ajoutez ici l'évolution du prix dans la journée.";
+  }
+
+  planState.fields = nextFields;
+  planState.aiSummary = aiPlan;
+  persistState();
+}
+
+function defaultRiskForPlan(planName) {
+  if (planName === "scalping") {
+    return "0.5";
+  }
+
+  if (planName === "intraday") {
+    return "1";
+  }
+
+  return "1.5";
+}
+
+function normalizeEnum(value, allowedValues) {
+  const candidate = sanitizeText(value);
+  return allowedValues.find((item) => item.toLowerCase() === candidate.toLowerCase()) || null;
+}
+
+function normalizeSession(value) {
+  return normalizeEnum(value, ["Londres", "US", "Hors session"]);
+}
+
+function normalizeNumber(value) {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return value;
+  }
+
+  if (typeof value !== "string") {
+    return null;
+  }
+
+  const cleaned = value.replace(/[^0-9,.-]/g, "").replace(",", ".");
+  const parsed = Number.parseFloat(cleaned);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function normalizeRiskPercent(value, planName) {
+  return normalizeNumber(value) ?? Number.parseFloat(defaultRiskForPlan(planName));
+}
+
+function normalizeArray(value) {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value.map((item) => sanitizeText(item)).filter(Boolean);
+}
+
+function sanitizeText(value) {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+function formatNumericField(value) {
+  return Number.isFinite(value) ? String(value) : "";
 }
 
 function extractResponseText(data) {

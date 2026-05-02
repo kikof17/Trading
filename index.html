@@ -68,7 +68,7 @@
             </div>
           </div>
           <p class="panel-copy">
-            L'application fonctionne sans backend. Pour obtenir une lecture automatique des captures, renseignez un endpoint compatible OpenAI et une clé API. Sinon, l'application génère un plan guidé à partir de vos captures, notes et règles de stratégie.
+            L'application peut auto-remplir les plans à partir des captures si vous renseignez un endpoint compatible OpenAI, une clé API et un modèle vision. Sans cette configuration, le navigateur ne peut pas extraire seul un plan fiable depuis les images.
           </p>
           <div class="ai-grid">
             <label>
@@ -107,6 +107,7 @@
                 <span class="status-pill warm">Risque 0,25 % à 0,5 %</span>
               </div>
               <p class="required-timeframes">Captures utiles : H1, M15, M5, M3, M1.</p>
+              <p class="auto-hint">Collez les captures puis validez. L'analyse IA remplit automatiquement le biais, le scénario, l'entrée, le stop, la cible et les notes.</p>
               <div class="input-grid">
                 <label>
                   <span class="field-label">Biais minute</span>
@@ -159,7 +160,7 @@
                 <input class="image-input" name="images" type="file" accept="image/*" multiple hidden>
               </div>
               <div class="action-row">
-                <button class="primary-button" type="submit">Générer le plan scalping</button>
+                <button class="primary-button" type="submit">Valider les captures</button>
                 <button class="ghost-button save-plan" type="button">Sauvegarder l'onglet</button>
                 <button class="ghost-button clear-images" type="button">Effacer les captures</button>
               </div>
@@ -167,7 +168,7 @@
             <section class="output-panel">
               <div class="output-header">
                 <h3>Analyse et plan</h3>
-                <button class="ghost-button ai-runner" data-plan="scalping" type="button">Analyse IA</button>
+                <button class="ghost-button ai-runner" data-plan="scalping" type="button">Relancer l'analyse IA</button>
               </div>
               <div class="image-preview" data-preview="scalping"></div>
               <article class="result-card" data-result="scalping">
@@ -188,6 +189,7 @@
                 <span class="status-pill cool">Risque 0,5 % à 1 %</span>
               </div>
               <p class="required-timeframes">Captures utiles : Daily, H4, H1, M15, M5.</p>
+              <p class="auto-hint">Collez les captures puis validez. L'analyse IA remplit automatiquement le biais, le scénario, l'entrée, le stop, la cible et les notes.</p>
               <div class="input-grid">
                 <label>
                   <span class="field-label">Biais du jour</span>
@@ -236,7 +238,7 @@
                 <input class="image-input" name="images" type="file" accept="image/*" multiple hidden>
               </div>
               <div class="action-row">
-                <button class="primary-button" type="submit">Générer le plan intraday</button>
+                <button class="primary-button" type="submit">Valider les captures</button>
                 <button class="ghost-button save-plan" type="button">Sauvegarder l'onglet</button>
                 <button class="ghost-button clear-images" type="button">Effacer les captures</button>
               </div>
@@ -244,7 +246,7 @@
             <section class="output-panel">
               <div class="output-header">
                 <h3>Analyse et plan</h3>
-                <button class="ghost-button ai-runner" data-plan="intraday" type="button">Analyse IA</button>
+                <button class="ghost-button ai-runner" data-plan="intraday" type="button">Relancer l'analyse IA</button>
               </div>
               <div class="image-preview" data-preview="intraday"></div>
               <article class="result-card" data-result="intraday">
@@ -265,6 +267,7 @@
                 <span class="status-pill deep">Risque 0,5 % à 1,5 %</span>
               </div>
               <p class="required-timeframes">Captures utiles : Weekly, Daily, H4, H1.</p>
+              <p class="auto-hint">Collez les captures puis validez. L'analyse IA remplit automatiquement le biais, le scénario, l'entrée, le stop, la cible et les notes.</p>
               <div class="input-grid">
                 <label>
                   <span class="field-label">Biais de fond</span>
@@ -313,7 +316,7 @@
                 <input class="image-input" name="images" type="file" accept="image/*" multiple hidden>
               </div>
               <div class="action-row">
-                <button class="primary-button" type="submit">Générer le plan swing</button>
+                <button class="primary-button" type="submit">Valider les captures</button>
                 <button class="ghost-button save-plan" type="button">Sauvegarder l'onglet</button>
                 <button class="ghost-button clear-images" type="button">Effacer les captures</button>
               </div>
@@ -321,7 +324,7 @@
             <section class="output-panel">
               <div class="output-header">
                 <h3>Analyse et plan</h3>
-                <button class="ghost-button ai-runner" data-plan="swing" type="button">Analyse IA</button>
+                <button class="ghost-button ai-runner" data-plan="swing" type="button">Relancer l'analyse IA</button>
               </div>
               <div class="image-preview" data-preview="swing"></div>
               <article class="result-card" data-result="swing">
