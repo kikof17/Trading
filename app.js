@@ -1,5 +1,7 @@
 const STORAGE_KEY = "xauusd-trading-planner-v1";
 const AI_STORAGE_KEY = "xauusd-trading-planner-ai-v1";
+const IMAGE_DB_NAME = "xauusd-trading-planner-images";
+const IMAGE_STORE_NAME = "planImages";
 
 const strategyProfiles = {
   scalping: {
@@ -45,6 +47,7 @@ initializeOverview();
 initializeForms();
 initializeAiConfig();
 hydrateUi();
+loadPersistedImages();
 
 function loadState() {
   const fallback = {
@@ -106,7 +109,20 @@ function emptyPlanState() {
 }
 
 function persistState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  const serializedState = {
+    overview: state.overview,
+    plans: Object.fromEntries(
+      Object.entries(state.plans).map(([planName, planState]) => [
+        planName,
+        {
+          ...planState,
+          images: []
+        }
+      ])
+    )
+  };
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(serializedState));
 }
 
 function initializeTabs() {
@@ -195,6 +211,7 @@ function initializeForms() {
       state.plans[planName].images = [];
       state.plans[planName].aiSummary = null;
       persistState();
+      clearPersistedImages(planName);
       hydratePlan(planName);
     });
 
@@ -288,6 +305,7 @@ async function appendFilesToPlan(planName, files) {
 
   state.plans[planName].images = [...state.plans[planName].images, ...images].slice(-10);
   persistState();
+  await savePlanImages(planName, state.plans[planName].images);
 }
 
 function readFileAsDataUrl(file) {
@@ -751,4 +769,75 @@ function getAiConfig(options = { preferDom: true }) {
     apiKey: apiKeyInput.value.trim() || saved.apiKey || "",
     model: modelInput.value.trim() || saved.model || ""
   };
+}
+
+async function loadPersistedImages() {
+  for (const planName of Object.keys(state.plans)) {
+    state.plans[planName].images = await readPlanImages(planName);
+    hydratePlan(planName);
+  }
+}
+
+function openImageDb() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(IMAGE_DB_NAME, 1);
+
+    request.onupgradeneeded = () => {
+      const db = request.result;
+      if (!db.objectStoreNames.contains(IMAGE_STORE_NAME)) {
+        db.createObjectStore(IMAGE_STORE_NAME, { keyPath: "planName" });
+      }
+    };
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function savePlanImages(planName, images) {
+  try {
+    const db = await openImageDb();
+    await new Promise((resolve, reject) => {
+      const transaction = db.transaction(IMAGE_STORE_NAME, "readwrite");
+      transaction.objectStore(IMAGE_STORE_NAME).put({ planName, images });
+      transaction.oncomplete = () => resolve();
+      transaction.onerror = () => reject(transaction.error);
+    });
+    db.close();
+  } catch (error) {
+    console.error("Image persistence failed", error);
+    showFeedback("saveFeedback", "Les captures n'ont pas pu être stockées localement.");
+  }
+}
+
+async function readPlanImages(planName) {
+  try {
+    const db = await openImageDb();
+    const record = await new Promise((resolve, reject) => {
+      const transaction = db.transaction(IMAGE_STORE_NAME, "readonly");
+      const request = transaction.objectStore(IMAGE_STORE_NAME).get(planName);
+      request.onsuccess = () => resolve(request.result || null);
+      request.onerror = () => reject(request.error);
+    });
+    db.close();
+    return Array.isArray(record?.images) ? record.images : [];
+  } catch (error) {
+    console.error("Image read failed", error);
+    return [];
+  }
+}
+
+async function clearPersistedImages(planName) {
+  try {
+    const db = await openImageDb();
+    await new Promise((resolve, reject) => {
+      const transaction = db.transaction(IMAGE_STORE_NAME, "readwrite");
+      transaction.objectStore(IMAGE_STORE_NAME).delete(planName);
+      transaction.oncomplete = () => resolve();
+      transaction.onerror = () => reject(transaction.error);
+    });
+    db.close();
+  } catch (error) {
+    console.error("Image delete failed", error);
+  }
 }
