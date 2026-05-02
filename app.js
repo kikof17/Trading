@@ -142,7 +142,7 @@ function initializeOverview() {
 }
 
 function initializeAiConfig() {
-  const saved = loadAiConfig();
+  const saved = getAiConfig({ preferDom: false });
   document.getElementById("apiEndpoint").value = saved.endpoint || "https://api.openai.com/v1/responses";
   document.getElementById("apiKey").value = saved.apiKey || "";
   document.getElementById("apiModel").value = saved.model || "gpt-4.1-mini";
@@ -260,7 +260,7 @@ function initializeForms() {
 }
 
 async function runPlanGeneration(planName) {
-  const config = loadAiConfig();
+  const config = getAiConfig();
   const plan = state.plans[planName];
 
   if (config.endpoint && config.apiKey && config.model && plan.images.length) {
@@ -482,7 +482,7 @@ function showFeedback(elementId, message) {
 }
 
 async function runAiAnalysis(planName, options = { autoFill: false }) {
-  const config = loadAiConfig();
+  const config = getAiConfig();
   if (!config.endpoint || !config.apiKey || !config.model) {
     showFeedback("aiFeedback", "Renseignez endpoint, clé API et modèle avant l'analyse IA.");
     return;
@@ -734,4 +734,21 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
+}
+
+function getAiConfig(options = { preferDom: true }) {
+  const saved = loadAiConfig();
+  const endpointInput = document.getElementById("apiEndpoint");
+  const apiKeyInput = document.getElementById("apiKey");
+  const modelInput = document.getElementById("apiModel");
+
+  if (!options.preferDom || !endpointInput || !apiKeyInput || !modelInput) {
+    return saved;
+  }
+
+  return {
+    endpoint: endpointInput.value.trim() || saved.endpoint || "",
+    apiKey: apiKeyInput.value.trim() || saved.apiKey || "",
+    model: modelInput.value.trim() || saved.model || ""
+  };
 }

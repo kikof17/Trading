@@ -108,10 +108,11 @@
               </div>
               <p class="required-timeframes">Captures utiles : H1, M15, M5, M3, M1.</p>
               <p class="auto-hint">Collez les captures puis validez. L'analyse IA remplit automatiquement le biais, le scénario, l'entrée, le stop, la cible et les notes.</p>
+              <p class="auto-state">Ces champs sont auto-remplis par l'analyse des captures. Vous n'avez pas à les saisir.</p>
               <div class="input-grid">
                 <label>
                   <span class="field-label">Biais minute</span>
-                  <select name="bias">
+                  <select name="bias" class="auto-select" tabindex="-1" aria-disabled="true">
                     <option value="Long">Long</option>
                     <option value="Short">Short</option>
                     <option value="Neutre" selected>Neutre</option>
@@ -119,7 +120,7 @@
                 </label>
                 <label>
                   <span class="field-label">Session</span>
-                  <select name="session">
+                  <select name="session" class="auto-select" tabindex="-1" aria-disabled="true">
                     <option value="Londres">Londres</option>
                     <option value="US">US</option>
                     <option value="Hors session" selected>Hors session</option>
@@ -127,24 +128,24 @@
                 </label>
                 <label>
                   <span class="field-label">Risque %</span>
-                  <input name="riskPercent" type="number" min="0.1" max="2" step="0.05" value="0.5">
+                  <input name="riskPercent" class="auto-field" type="number" min="0.1" max="2" step="0.05" value="0.5" readonly>
                 </label>
                 <label>
                   <span class="field-label">Entrée envisagée</span>
-                  <input name="entry" type="number" step="0.01" placeholder="2368.20">
+                  <input name="entry" class="auto-field" type="number" step="0.01" placeholder="2368.20" readonly>
                 </label>
                 <label>
                   <span class="field-label">Invalidation / SL</span>
-                  <input name="stop" type="number" step="0.01" placeholder="2365.80">
+                  <input name="stop" class="auto-field" type="number" step="0.01" placeholder="2365.80" readonly>
                 </label>
                 <label>
                   <span class="field-label">Cible principale</span>
-                  <input name="target" type="number" step="0.01" placeholder="2372.10">
+                  <input name="target" class="auto-field" type="number" step="0.01" placeholder="2372.10" readonly>
                 </label>
               </div>
               <label>
                 <span class="field-label">Lecture des captures</span>
-                <textarea name="notes" rows="6" placeholder="Exemple : prise de liquidité sous le low européen, rejet net, MSS haussier M1, FVG M3 sur retest."></textarea>
+                <textarea name="notes" class="auto-field" rows="6" placeholder="Exemple : prise de liquidité sous le low européen, rejet net, MSS haussier M1, FVG M3 sur retest." readonly></textarea>
               </label>
               <label>
                 <span class="field-label">Mise à jour intrajournalière</span>
@@ -190,10 +191,11 @@
               </div>
               <p class="required-timeframes">Captures utiles : Daily, H4, H1, M15, M5.</p>
               <p class="auto-hint">Collez les captures puis validez. L'analyse IA remplit automatiquement le biais, le scénario, l'entrée, le stop, la cible et les notes.</p>
+              <p class="auto-state">Ces champs sont auto-remplis par l'analyse des captures. Vous n'avez pas à les saisir.</p>
               <div class="input-grid">
                 <label>
                   <span class="field-label">Biais du jour</span>
-                  <select name="bias">
+                  <select name="bias" class="auto-select" tabindex="-1" aria-disabled="true">
                     <option value="Long">Long</option>
                     <option value="Short">Short</option>
                     <option value="Neutre" selected>Neutre</option>
@@ -201,28 +203,28 @@
                 </label>
                 <label>
                   <span class="field-label">Scénario principal</span>
-                  <input name="scenario" type="text" placeholder="Sweep du low asiatique puis reprise haussière">
+                  <input name="scenario" class="auto-field" type="text" placeholder="Sweep du low asiatique puis reprise haussière" readonly>
                 </label>
                 <label>
                   <span class="field-label">Risque %</span>
-                  <input name="riskPercent" type="number" min="0.1" max="2" step="0.05" value="1">
+                  <input name="riskPercent" class="auto-field" type="number" min="0.1" max="2" step="0.05" value="1" readonly>
                 </label>
                 <label>
                   <span class="field-label">Entrée envisagée</span>
-                  <input name="entry" type="number" step="0.01" placeholder="2368.20">
+                  <input name="entry" class="auto-field" type="number" step="0.01" placeholder="2368.20" readonly>
                 </label>
                 <label>
                   <span class="field-label">Invalidation / SL</span>
-                  <input name="stop" type="number" step="0.01" placeholder="2360.50">
+                  <input name="stop" class="auto-field" type="number" step="0.01" placeholder="2360.50" readonly>
                 </label>
                 <label>
                   <span class="field-label">Cible principale</span>
-                  <input name="target" type="number" step="0.01" placeholder="2384.00">
+                  <input name="target" class="auto-field" type="number" step="0.01" placeholder="2384.00" readonly>
                 </label>
               </div>
               <label>
                 <span class="field-label">Lecture des zones</span>
-                <textarea name="notes" rows="6" placeholder="Exemple : biais H4 haussier, support H1 sur open daily, FVG M15 sous le high asiatique."></textarea>
+                <textarea name="notes" class="auto-field" rows="6" placeholder="Exemple : biais H4 haussier, support H1 sur open daily, FVG M15 sous le high asiatique." readonly></textarea>
               </label>
               <label>
                 <span class="field-label">Mise à jour intrajournalière</span>
@@ -268,10 +270,11 @@
               </div>
               <p class="required-timeframes">Captures utiles : Weekly, Daily, H4, H1.</p>
               <p class="auto-hint">Collez les captures puis validez. L'analyse IA remplit automatiquement le biais, le scénario, l'entrée, le stop, la cible et les notes.</p>
+              <p class="auto-state">Ces champs sont auto-remplis par l'analyse des captures. Vous n'avez pas à les saisir.</p>
               <div class="input-grid">
                 <label>
                   <span class="field-label">Biais de fond</span>
-                  <select name="bias">
+                  <select name="bias" class="auto-select" tabindex="-1" aria-disabled="true">
                     <option value="Long">Long</option>
                     <option value="Short">Short</option>
                     <option value="Neutre" selected>Neutre</option>
@@ -279,28 +282,28 @@
                 </label>
                 <label>
                   <span class="field-label">Scénario majeur</span>
-                  <input name="scenario" type="text" placeholder="Pullback Daily vers support puis reprise">
+                  <input name="scenario" class="auto-field" type="text" placeholder="Pullback Daily vers support puis reprise" readonly>
                 </label>
                 <label>
                   <span class="field-label">Risque %</span>
-                  <input name="riskPercent" type="number" min="0.1" max="3" step="0.1" value="1.5">
+                  <input name="riskPercent" class="auto-field" type="number" min="0.1" max="3" step="0.1" value="1.5" readonly>
                 </label>
                 <label>
                   <span class="field-label">Entrée envisagée</span>
-                  <input name="entry" type="number" step="0.01" placeholder="2342.00">
+                  <input name="entry" class="auto-field" type="number" step="0.01" placeholder="2342.00" readonly>
                 </label>
                 <label>
                   <span class="field-label">Invalidation / SL</span>
-                  <input name="stop" type="number" step="0.01" placeholder="2310.00">
+                  <input name="stop" class="auto-field" type="number" step="0.01" placeholder="2310.00" readonly>
                 </label>
                 <label>
                   <span class="field-label">Cible principale</span>
-                  <input name="target" type="number" step="0.01" placeholder="2410.00">
+                  <input name="target" class="auto-field" type="number" step="0.01" placeholder="2410.00" readonly>
                 </label>
               </div>
               <label>
                 <span class="field-label">Contexte macro-technique</span>
-                <textarea name="notes" rows="6" placeholder="Exemple : Weekly haussier, retracement 50 % Daily, rejet H4, dollar en consolidation."></textarea>
+                <textarea name="notes" class="auto-field" rows="6" placeholder="Exemple : Weekly haussier, retracement 50 % Daily, rejet H4, dollar en consolidation." readonly></textarea>
               </label>
               <label>
                 <span class="field-label">Suivi du plan</span>

@@ -179,6 +179,7 @@ button:focus {
 .panel-copy,
 .required-timeframes,
 .auto-hint,
+.auto-state,
 .save-feedback,
 .result-card p,
 .result-card li {
@@ -189,6 +190,26 @@ button:focus {
 .auto-hint {
   margin: -6px 0 0;
   font-size: 0.94rem;
+}
+
+.auto-state {
+  margin: -10px 0 0;
+  font-size: 0.88rem;
+}
+
+.auto-field,
+.auto-select {
+  background: rgba(235, 238, 238, 0.88);
+  color: #4d5754;
+}
+
+.auto-field {
+  cursor: default;
+}
+
+.auto-select {
+  pointer-events: none;
+  appearance: none;
 }
 
 .tabs-panel {
