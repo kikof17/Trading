@@ -285,11 +285,40 @@ button:focus {
   border-radius: 22px;
   padding: 18px;
   background: rgba(209, 237, 229, 0.38);
+  display: grid;
+  gap: 12px;
 }
 
 .upload-zone.drag-over {
   border-color: var(--accent-strong);
   background: rgba(209, 237, 229, 0.72);
+}
+
+.paste-surface {
+  min-height: 112px;
+  border-radius: 18px;
+  border: 1px solid rgba(13, 107, 84, 0.18);
+  background: rgba(255, 255, 255, 0.72);
+  padding: 14px 16px;
+  color: var(--text);
+}
+
+.paste-surface:empty::before {
+  content: attr(data-placeholder);
+  color: var(--muted);
+}
+
+.paste-surface:focus {
+  outline: 2px solid rgba(13, 107, 84, 0.3);
+  outline-offset: 2px;
+}
+
+.upload-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  color: var(--muted);
 }
 
 .image-input {

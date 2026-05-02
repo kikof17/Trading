@@ -149,11 +149,15 @@
                 <span class="field-label">Mise à jour intrajournalière</span>
                 <textarea name="updates" rows="4" placeholder="Exemple : 10h12, TP1 touché, ralentissement sous résistance M5."></textarea>
               </label>
-              <label class="upload-zone">
+              <div class="upload-zone" data-plan="scalping">
                 <span class="field-label">Captures</span>
-                <input class="image-input" name="images" type="file" accept="image/*" multiple>
-                <span>Glissez, collez ou sélectionnez vos vues MT5.</span>
-              </label>
+                <div class="paste-surface" contenteditable="true" tabindex="0" data-placeholder="Cliquez ici puis faites Ctrl+V après une capture Greenshot."></div>
+                <div class="upload-actions">
+                  <button class="ghost-button browse-images" type="button">Choisir sur le disque</button>
+                  <span>Vous pouvez aussi glisser-déposer directement une image dans cette zone.</span>
+                </div>
+                <input class="image-input" name="images" type="file" accept="image/*" multiple hidden>
+              </div>
               <div class="action-row">
                 <button class="primary-button" type="submit">Générer le plan scalping</button>
                 <button class="ghost-button save-plan" type="button">Sauvegarder l'onglet</button>
@@ -222,11 +226,15 @@
                 <span class="field-label">Mise à jour intrajournalière</span>
                 <textarea name="updates" rows="4" placeholder="Exemple : 14h38, prise de liquidité au-dessus du high de Londres, rejet M5 confirmé."></textarea>
               </label>
-              <label class="upload-zone">
+              <div class="upload-zone" data-plan="intraday">
                 <span class="field-label">Captures</span>
-                <input class="image-input" name="images" type="file" accept="image/*" multiple>
-                <span>Ajoutez vos vues de contexte et d'exécution.</span>
-              </label>
+                <div class="paste-surface" contenteditable="true" tabindex="0" data-placeholder="Cliquez ici puis faites Ctrl+V après une capture Greenshot."></div>
+                <div class="upload-actions">
+                  <button class="ghost-button browse-images" type="button">Choisir sur le disque</button>
+                  <span>Ajoutez ici vos vues de contexte et d'exécution, par collage ou glisser-déposer.</span>
+                </div>
+                <input class="image-input" name="images" type="file" accept="image/*" multiple hidden>
+              </div>
               <div class="action-row">
                 <button class="primary-button" type="submit">Générer le plan intraday</button>
                 <button class="ghost-button save-plan" type="button">Sauvegarder l'onglet</button>
@@ -295,11 +303,15 @@
                 <span class="field-label">Suivi du plan</span>
                 <textarea name="updates" rows="4" placeholder="Exemple : Daily clôture au-dessus du support, structure toujours valide."></textarea>
               </label>
-              <label class="upload-zone">
+              <div class="upload-zone" data-plan="swing">
                 <span class="field-label">Captures</span>
-                <input class="image-input" name="images" type="file" accept="image/*" multiple>
-                <span>Ajoutez vos captures de structure et de timing.</span>
-              </label>
+                <div class="paste-surface" contenteditable="true" tabindex="0" data-placeholder="Cliquez ici puis faites Ctrl+V après une capture Greenshot."></div>
+                <div class="upload-actions">
+                  <button class="ghost-button browse-images" type="button">Choisir sur le disque</button>
+                  <span>Ajoutez ici vos captures de structure et de timing, par collage ou glisser-déposer.</span>
+                </div>
+                <input class="image-input" name="images" type="file" accept="image/*" multiple hidden>
+              </div>
               <div class="action-row">
                 <button class="primary-button" type="submit">Générer le plan swing</button>
                 <button class="ghost-button save-plan" type="button">Sauvegarder l'onglet</button>

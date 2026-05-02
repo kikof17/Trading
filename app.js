@@ -174,6 +174,9 @@ function initializeForms() {
   document.querySelectorAll(".analysis-form").forEach((form) => {
     const planName = form.dataset.plan;
     const uploadZone = form.querySelector(".upload-zone");
+    const pasteSurface = form.querySelector(".paste-surface");
+    const imageInput = form.querySelector(".image-input");
+    const browseButton = form.querySelector(".browse-images");
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -192,18 +195,31 @@ function initializeForms() {
       hydratePlan(planName);
     });
 
-    form.addEventListener("paste", async (event) => {
+    pasteSurface.addEventListener("paste", async (event) => {
       const pastedFiles = extractPastedImages(event.clipboardData);
       if (!pastedFiles.length) {
         return;
       }
 
       event.preventDefault();
+      pasteSurface.textContent = "";
       await appendFilesToPlan(planName, pastedFiles);
       hydratePlan(planName);
     });
 
-    form.querySelector(".image-input").addEventListener("change", async (event) => {
+    browseButton.addEventListener("click", () => {
+      imageInput.click();
+    });
+
+    uploadZone.addEventListener("click", (event) => {
+      if (event.target === imageInput || event.target.closest("button, input, textarea, select")) {
+        return;
+      }
+
+      pasteSurface.focus();
+    });
+
+    imageInput.addEventListener("change", async (event) => {
       const files = Array.from(event.target.files || []);
       if (!files.length) {
         return;
