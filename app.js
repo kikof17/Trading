@@ -164,18 +164,25 @@ function initializeAiConfig() {
   document.getElementById("apiModel").value = saved.model || "gpt-4.1-mini";
 
   document.getElementById("saveAiConfig").addEventListener("click", () => {
-    const config = {
-      endpoint: document.getElementById("apiEndpoint").value.trim(),
-      apiKey: document.getElementById("apiKey").value.trim(),
-      model: document.getElementById("apiModel").value.trim()
-    };
-    localStorage.setItem(AI_STORAGE_KEY, JSON.stringify(config));
-    showFeedback("aiFeedback", "Configuration IA sauvegardée localement.");
+    persistAiConfig();
+    showFeedback("aiFeedback", "Configuration IA sauvegardée sur cette version du site.");
+  });
+
+  ["apiEndpoint", "apiKey", "apiModel"].forEach((id) => {
+    document.getElementById(id).addEventListener("input", () => {
+      updateAiStatus();
+    });
+    document.getElementById(id).addEventListener("change", () => {
+      persistAiConfig();
+      updateAiStatus();
+    });
   });
 
   document.querySelectorAll(".ai-runner").forEach((button) => {
     button.addEventListener("click", () => runAiAnalysis(button.dataset.plan));
   });
+
+  updateAiStatus();
 }
 
 function loadAiConfig() {
@@ -285,7 +292,12 @@ async function runPlanGeneration(planName) {
     return;
   }
 
-  generateLocalAnalysis(planName, { automationRequested: true });
+  if (!plan.images.length) {
+    renderBlockingResult(planName, "Aucune capture detectee", "Collez ou glissez au moins une capture dans l'onglet avant validation.");
+    return;
+  }
+
+  renderBlockingResult(planName, "Configuration IA manquante sur la version Git", "Renseignez l'endpoint, la cle API et le modele dans le panneau Vision assistee de cette page GitHub Pages. Cette configuration est separee de la version locale.");
 }
 
 function extractPastedImages(clipboardData) {
@@ -502,12 +514,14 @@ function showFeedback(elementId, message) {
 async function runAiAnalysis(planName, options = { autoFill: false }) {
   const config = getAiConfig();
   if (!config.endpoint || !config.apiKey || !config.model) {
+    renderBlockingResult(planName, "Configuration IA incomplète", "La page GitHub Pages n'a pas encore de configuration IA exploitable. Remplissez les trois champs du panneau Vision assistee puis sauvegardez.");
     showFeedback("aiFeedback", "Renseignez endpoint, clé API et modèle avant l'analyse IA.");
     return;
   }
 
   const plan = state.plans[planName];
   if (!plan.images.length) {
+    renderBlockingResult(planName, "Aucune capture disponible", "La validation a été lancée sans image enregistrée dans cet onglet. Recollez les captures puis relancez l'analyse.");
     showFeedback("aiFeedback", "Ajoutez au moins une capture avant l'analyse IA.");
     return;
   }
@@ -545,7 +559,7 @@ async function runAiAnalysis(planName, options = { autoFill: false }) {
     showFeedback("aiFeedback", `Analyse IA ${planName} terminée.`);
   } catch (error) {
     console.error(error);
-    generateLocalAnalysis(planName, { automationRequested: options.autoFill });
+    renderBlockingResult(planName, "Appel IA échoué", `La requete vers l'API a echoue : ${error.message}`);
     showFeedback("aiFeedback", `Analyse IA indisponible : ${error.message}`);
   }
 }
@@ -769,6 +783,32 @@ function getAiConfig(options = { preferDom: true }) {
     apiKey: apiKeyInput.value.trim() || saved.apiKey || "",
     model: modelInput.value.trim() || saved.model || ""
   };
+}
+
+function persistAiConfig() {
+  const config = getAiConfig();
+  localStorage.setItem(AI_STORAGE_KEY, JSON.stringify(config));
+}
+
+function updateAiStatus() {
+  const config = getAiConfig();
+  const statusNode = document.getElementById("aiStatus");
+  const ready = Boolean(config.endpoint && config.apiKey && config.model);
+  statusNode.classList.toggle("ready", ready);
+  statusNode.classList.toggle("error", !ready);
+  statusNode.textContent = ready
+    ? "Configuration IA disponible sur cette version GitHub Pages."
+    : "Configuration IA absente ou incomplète sur cette version GitHub Pages. La version locale ne partage pas ce stockage.";
+}
+
+function renderBlockingResult(planName, title, message) {
+  const resultNode = document.querySelector(`[data-result="${planName}"]`);
+  resultNode.innerHTML = `
+    <div class="result-block">
+      <h4>${escapeHtml(title)}</h4>
+      <p>${escapeHtml(message)}</p>
+    </div>
+  `;
 }
 
 async function loadPersistedImages() {
